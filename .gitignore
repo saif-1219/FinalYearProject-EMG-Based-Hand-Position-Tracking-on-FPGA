@@ -101,10 +101,20 @@ RoFormer_Communication_Pipeline/.pytest_cache/
 # RoFormer_Communication_Pipeline/*.mat
 # RoFormer_Communication_Pipeline/data/
 
+# Large MATLAB data files (exceeds GitHub 100MB limit)
+FYP_Hand_Viz/Assets/MatlabFiles/*.mat
+RoFormer_Communication_Pipeline/*.mat
+
 # Model checkpoints (too large to commit, should download)
 RoFormer_Communication_Pipeline/roformer.pt
 RoFormer_Communication_Pipeline/*.pt
 RoFormer_Communication_Pipeline/checkpoints/
+
+# Large archives
+*.zip
+*.rar
+*.7z
+RoFormer_Communication_Pipeline/roformer.pt.zip
 
 # ─────────────────────────────────────────────────────────────────────────
 # OS-specific

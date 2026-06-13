@@ -1,0 +1,122 @@
+%% --- CONFIGURATION ---
+unityIP = '127.0.0.1';
+% portEMG = 8052;
+portGlove = 8051;
+windowSize = 400;    % Size of EMG chunk
+stride = 50;
+gloveStep = 50;     % How many frames to skip for glove (to keep sync with EMG)
+
+
+
+%------------Preprocessing------------------------
+
+% --- Setup Parameters ---
+mu = 255; 
+epsilon = 1e-8; % Small value to prevent division by zero
+
+% 1. Apply Bandpass Filter
+% (Assumes bandpass_butterworth is defined in your path)
+emg = bandpass_butterworth(emg);
+
+% --- EMG: Normalize by Max Absolute Value ---
+% max(X, [], 1) calculates max along columns (axis=0 equivalent)
+emg_max_abs = max(abs(emg), [], 1); 
+
+% Element-wise division (./) with implicit expansion (broadcasting)
+emg = emg ./ (emg_max_abs + epsilon);
+
+% 2. Apply Mu-Law Normalization
+% (Assumes mu_law_normalize is defined in your path)
+emg = mu_law_normalize(emg, mu);
+
+% --- Glove: Min-Max Normalization [0, 1] ---
+glove_min = min(glove, [], 1);
+glove_max = max(glove, [], 1);
+
+% Apply formula: (x - min) / (max - min)
+glove = (glove - glove_min) ./ (glove_max - glove_min + epsilon);
+
+
+
+%---------------------------END-------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Get data sizes
+[totalSamplesEMG, numChannels] = size(emg);
+[totalSamplesGlove, numJoints] = size(glove);
+
+% Initialize indices
+idx_emg = 1;
+idx_glove = 400;
+
+%% --- SETUP UDP ONCE ---
+% We only need one UDP object to send to multiple destinations
+u = udpport('IPV4');
+
+disp('Starting Combined Stream (EMG + Glove)...');
+indexxxx = 1;
+%% --- MAIN LOOP ---
+while 1 == 1 %indexxxx < 11
+    % =========================================================
+    % 1. PROCESS EMG DATA (Port 8051)
+    
+    % Check if we need to loop back EMG
+    if (idx_emg + windowSize - 1) > totalSamplesEMG
+        idx_emg = 1;
+        disp('EMG: Reached end of data. Looping.');
+    end
+
+    % Extract 400 rows of EMG
+    emgChunk = emg(idx_emg : idx_emg + windowSize - 1, :);
+    
+    % Send EMG
+    % write(u, jsonencode(emgChunk), "string", unityIP, portEMG);
+
+    
+    % =========================================================
+    % 2. PROCESS GLOVE DATA (Port 8052)
+    % =========================================================
+    
+    % Check if we need to loop back Glove
+    % (We use a separate check in case glove data length differs from EMG)
+    if (idx_glove + 1) > totalSamplesGlove % Checking +1 because we take single rows
+        idx_glove = 1;
+        disp('Glove: Reached end of data. Looping.');
+    end
+
+    % Extract specific joints for the CURRENT frame
+    % Note: We are taking the single row at idx_glove
+    i = idx_glove; 
+    JointToSend = [ glove(i,2) glove(i,3) glove(i,5) glove(i,6) glove(i,8) glove(i,9) glove(i,12) glove(i,13) glove(i,16) glove(i,17) 0 0]
+
+    combMsgToSend = [emgChunk; JointToSend];
+
+    % Send Glove
+    write(u, jsonencode(combMsgToSend), "string", unityIP, portGlove);
+
+    
+    % =========================================================
+    % 3. UPDATE & PAUSE
+    % =========================================================
+    
+    % Advance indices
+    idx_emg = idx_emg + windowSize;
+    
+    % Advance glove index by same amount to keep sync
+    % (Or change 'gloveStep' to 1 if you want slow-motion glove playback)
+    idx_glove = idx_glove + gloveStep; 
+    indexxxx = indexxxx + 1;
+    pause(0.1); 
+end

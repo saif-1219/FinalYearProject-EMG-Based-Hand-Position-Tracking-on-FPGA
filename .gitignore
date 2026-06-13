@@ -1,0 +1,217 @@
+# ============================================================================
+# sEMG-to-Hand System - Global .gitignore
+# ============================================================================
+
+# ─────────────────────────────────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────────────────────────────────
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# VS Code Python
+.vscode/
+*.code-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# Poetry
+poetry.lock
+
+# ─────────────────────────────────────────────────────────────────────────
+# Unity
+# ─────────────────────────────────────────────────────────────────────────
+
+# Unity Library and Logs (large generated files)
+FYP_Hand_Viz/Library/
+FYP_Hand_Viz/Logs/
+FYP_Hand_Viz/Temp/
+FYP_Hand_Viz/obj/
+FYP_Hand_Viz/.vscode/
+
+# Build results
+FYP_Hand_Viz/Builds/
+FYP_Hand_Viz/Build/
+
+# Generated Visual Studio solution
+FYP_Hand_Viz/.vs/
+FYP_Hand_Viz/*.csproj
+FYP_Hand_Viz/*.csproj.user
+FYP_Hand_Viz/*.sln
+
+# User-specific preferences (but keep project settings)
+FYP_Hand_Viz/UserSettings/
+
+# Rider
+FYP_Hand_Viz/.idea/
+FYP_Hand_Viz/Assets/Plugins/GitHub/Editor.meta
+FYP_Hand_Viz/Assets/Plugins/GitHub.meta
+
+# ─────────────────────────────────────────────────────────────────────────
+# RoFormer Communication Pipeline
+# ─────────────────────────────────────────────────────────────────────────
+
+# Generated outputs
+RoFormer_Communication_Pipeline/emg_preprocess.png
+RoFormer_Communication_Pipeline/predictions.png
+RoFormer_Communication_Pipeline/*.txt
+RoFormer_Communication_Pipeline/output/
+RoFormer_Communication_Pipeline/results/
+
+# Cache
+RoFormer_Communication_Pipeline/__pycache__/
+RoFormer_Communication_Pipeline/.pytest_cache/
+
+# Data (optional - uncomment if you want to exclude)
+# RoFormer_Communication_Pipeline/*.mat
+# RoFormer_Communication_Pipeline/data/
+
+# Model checkpoints (too large to commit, should download)
+RoFormer_Communication_Pipeline/roformer.pt
+RoFormer_Communication_Pipeline/*.pt
+RoFormer_Communication_Pipeline/checkpoints/
+
+# ─────────────────────────────────────────────────────────────────────────
+# OS-specific
+# ─────────────────────────────────────────────────────────────────────────
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Linux
+.cache/
+*.swp
+*.swo
+*~
+
+# ─────────────────────────────────────────────────────────────────────────
+# Development Tools
+# ─────────────────────────────────────────────────────────────────────────
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.vim
+.netrwhist
+
+# ─────────────────────────────────────────────────────────────────────────
+# Documentation & Logs
+# ─────────────────────────────────────────────────────────────────────────
+
+# Logs
+*.log
+logs/
+
+# Documentation build
+docs/_build/
+site/
+
+# ─────────────────────────────────────────────────────────────────────────
+# Misc
+# ─────────────────────────────────────────────────────────────────────────
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+.temp/
+
+# System files
+.env.local
+.env.*.local
+
+# ─────────────────────────────────────────────────────────────────────────
+# Important: DO NOT IGNORE (explicitly included)
+# ─────────────────────────────────────────────────────────────────────────
+
+# These should be committed to the repository
+
+# Configuration (edit locally but commit template)
+!RoFormer_Communication_Pipeline/config.py
+!RoFormer_Communication_Pipeline/requirements.txt
+
+# Scripts and source code
+!RoFormer_Communication_Pipeline/*.py
+!FYP_Hand_Viz/Assets/Scripts/*.cs
+
+# Unity Assets
+!FYP_Hand_Viz/Assets/**/*.*
+!FYP_Hand_Viz/ProjectSettings/**
+
+# Documentation
+!README.md
+!QUICKSTART.md
+!*.md
+
+# Configuration examples
+!config.py
+!.gitignore
+!.gitattributes
+
+# License
+!LICENSE

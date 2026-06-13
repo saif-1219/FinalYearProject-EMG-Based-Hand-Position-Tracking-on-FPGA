@@ -1,0 +1,49 @@
+# Unity generated files
+Library/
+Logs/
+Temp/
+Builds/
+Build/
+.codegentemp/
+
+# Object meta files
+*.meta
+
+# Generated csproj files
+Assembly-CSharp.csproj
+Assembly-CSharp-firstpass.csproj
+*.csproj
+
+# Generated solution file
+*.sln
+
+# Visual Studio files
+.vs/
+.vscode/
+
+# MonoDevelop files
+.monodevelop/
+mono_crash.*
+
+# Build files
+*.apk
+*.unitypackage
+*.app
+
+# User-specific files
+UserSettings/
+.plastic/
+ignore.conf
+
+# Generated files
+predicted_angles.txt
+actual_angles.txt
+predicted.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+*.sublime-project
+*.sublime-workspace

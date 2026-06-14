@@ -83,11 +83,10 @@ target/
 # ═══════════════════════════════════════════════════════════════
 
 # Model files (large binary files)
-*.pt
+
 *.pth
 *.pkl
-roformer.pt
-best_roformer/
+
 
 # Data files
 *.mat

@@ -106,8 +106,6 @@ FYP_Hand_Viz/Assets/MatlabFiles/*.mat
 RoFormer_Communication_Pipeline/*.mat
 
 # Model checkpoints (too large to commit, should download)
-RoFormer_Communication_Pipeline/roformer.pt
-RoFormer_Communication_Pipeline/*.pt
 RoFormer_Communication_Pipeline/checkpoints/
 
 # Large archives
